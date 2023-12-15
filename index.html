@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffcbdb; /* Cor rosa pastel para o fundo */
+            color: #fff; /* Cor branca para o texto */
+            margin: 0;
+            height: 100vh; /* Para ocupar 100% da altura da viewport */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #question {
+            font-size: 20px;
+            margin-top: 20px; /* Reduzi a margem superior para centralizar melhor */
+        }
+        #options {
+            margin-top: 20px;
+        }
+        button {
+			background-color: #ffffff;
+			color: #ff0000;
+			font-size: 24px;
+			font-weight: bold;
+			padding: 20px 40px;
+			border: none;
+			border-radius: 50px;
+			cursor: pointer;
+			margin: 20px;
+		}
+
+		button:hover {
+			background-color: #ff9999;
+			color: #ffffff;
+		}-
+
+        /* Adicionando regra de mídia para telas pequenas */
+        @media screen and (max-width: 600px) {
+            #question {
+                font-size: 16px;
+            }
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="emoji.png" alt="" style="width:200px;height:200px;">
+    <div id="question">Quer namorar comigo?</div>
+    <div id="options">
+        <button onclick="showCustomDialog('Eu te amo princesa <3')">Sim</button>
+        <button id="noBtn" onmouseover="moveButton()">Não</button>
+    </div>
+    <script>
+        function showCustomDialog(message) {
+            var dialog = document.createElement('div');
+            dialog.style.position = 'fixed';
+            dialog.style.top = '50%';
+            dialog.style.left = '50%';
+            dialog.style.transform = 'translate(-50%, -50%)';
+            dialog.style.backgroundColor = '#ffc4d8';
+            dialog.style.padding = '20px';
+            dialog.style.borderRadius = '10px';
+            dialog.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+            dialog.style.zIndex = '1000';
+
+            var content = document.createElement('p');
+            content.textContent = message;
+            content.style.color = '#d98695'; /* Cor vermelha para o texto */
+            dialog.appendChild(content);
+
+            var okButton = document.createElement('button');
+            okButton.textContent = 'OK';
+            okButton.style.marginTop = '10px';
+            okButton.addEventListener('click', function() {
+                document.body.removeChild(dialog);
+                closeWindow();
+            });
+            dialog.appendChild(okButton);
+
+            document.body.appendChild(dialog);
+        }
+
+        function moveButton() {
+            var noBtn = document.getElementById('noBtn');
+            var margin = 50; // Margem desejada
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = margin + Math.random() * (window.innerWidth - 2 * margin) + 'px';
+            noBtn.style.top = margin + Math.random() * (window.innerHeight - 2 * margin) + 'px';
+        }
+
+        function closeWindow() {
+            window.close();
+        }
+    </script>
+</body>
+</html>
